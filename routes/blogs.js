@@ -74,8 +74,7 @@ exports.findBlogContentById = function(req, res) {
 	var _id = req.params.id;
 	Blog.findById(_id , function(blog) {
 		if (blog) {
-			res.write(blog.content);
-			res.end();
+			res.end(blog.content);
 		} 
 	});
 }
