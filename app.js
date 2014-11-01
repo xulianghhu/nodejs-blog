@@ -34,7 +34,7 @@ app.delete('/categories/:id', categories.remove);
 
 app.get('/blogs', blogs.findBlogs);
 app.get('/blogs/:id', blogs.findBlogById);
-
+app.post('/blogs/:id', blogs.save);
 app.delete('/blogs/:id', blogs.remove);
 app.get('/blogs/:id/content', blogs.findBlogContentById);
 
@@ -46,7 +46,7 @@ app.get('/admin/blogs', admin.blogs);
 app.get('/admin/categories/:id/edit', categories.edit);
 app.get('/admin/blogs/:id/edit', blogs.edit);
 app.post('/admin/blogs/:id/sticky', blogs.sticky);
-app.post('/admin/blogs/:id', blogs.save);
+
 
 
 // catch 404 and forward to error handler

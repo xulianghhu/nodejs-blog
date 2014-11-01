@@ -25,7 +25,7 @@ exports.save = function(req, res) {
 			category.name = req.body.name;
 			category.priority = req.body.priority;
 			category.blogCount = 0;
-			category.save(category);
+			category.save();
 		}
 	});
 	

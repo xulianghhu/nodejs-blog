@@ -61,6 +61,12 @@ exports.saveOrUpdate = function(blog) {
 	});
 }
 
+exports.updateById = function(_id, blog) {
+	Blog.update({_id: _id}, blog, function(err) {
+		console.log(err);
+	});
+}
+
 exports.removeById = function(_id, callback) {
 	Blog.update({_id: _id}, {removed: true}, function(err) {
 		callback(err);

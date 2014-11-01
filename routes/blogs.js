@@ -94,23 +94,31 @@ exports.findBlogById = function(req, res) {
 }
 
 exports.save = function(req, res) {
-	Blog.findById(req.params.id, function(b) {
-		var blog = {};
-		blog._id = req.params.id;
-		if (!b)
-			blog.sticky = 0;
-		
-		if (req.body.category != '') {
-			blog.category = req.body.category;
-			Category.incBlogCount(req.body.category);
+
+	Blog.findById(req.params.id, function(blog) {
+		if (blog) {
+			console.log(req.body);
+			var blog = {title: req.body.title, content: req.body.content};
+			if (req.body.category != '') {
+				blog.category = req.body.category;
+			}
+			
+			Blog.updateById(req.params.id, blog);
+			res.redirect('/blogs/' + req.params.id);
+		} else {
+			var blog = Blog.newInstance();
+			blog.title = req.body.title;
+			blog.content = req.body.content;
+			blog.removed = false;
+			if (req.body.category != '') {
+				blog.category = req.body.category;
+				Category.incBlogCount(req.body.category);
+			}
+			blog.save();
+			res.redirect('/blogs/' + blog._id);
 		}
-		blog.title = req.body.title;
-		blog.content = req.body.content;
-		blog.removed = false;
-		Blog.saveOrUpdate(blog);
-		
-		res.redirect('/blogs/' + blog._id);
 	});
+	
 }
 
 exports.remove = function(req, res) {
