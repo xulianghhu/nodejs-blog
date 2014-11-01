@@ -1,0 +1,29 @@
+extends layout
+
+block scripts
+	script(src='/javascripts/blog.js')
+
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 类别管理
+				a(href='/admin/categories/0/edit' style='margin-left:10px').btn.btn-success.btn-shadow.btn-sm#addCategory 添加
+			div.panel-body
+				table.table
+					tr
+						th #
+						th 名字
+						th 优先级
+						th 操作
+					-for(var i=0;i<categories.length;i++)
+						tr
+							td #{i}
+							td #{categories[i].name}
+							td #{categories[i].priority}
+							td
+								div.btn-group
+									a(_id='#{categories[i]._id}').btn.btn-primary.btn-shadow.btn-sm.removeCategory 删除
+									a(href='/admin/categories/#{categories[i]._id}/edit').btn.btn-success.btn-sm.btn-shadow 编辑
+							
+	

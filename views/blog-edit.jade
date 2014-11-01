@@ -1,0 +1,47 @@
+extends layout
+
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 博客编辑
+			div.panel-body
+				div
+					form(action='/admin/blogs/#{blog._id}' method='post')#form
+						section.panel
+							div.input-group
+								-var currentCategory='';
+								div.input-group-btn
+									button(type='button' data-toggle='dropdown').btn.btn-default.dropdown-toggle 类别
+										span.caret
+									ul(role='menu').dropdown-menu#categoryList
+										each category in categories
+											li(_id='#{category._id}')
+												a #{category.name}
+											if(blog.category != undefined && category._id.toString()==blog.category.toString())
+												-currentCategory=category.name;
+								input(type='text' style='display:none' name='category')#categoryId
+								input(type='text' disabled='disabled' value='#{currentCategory}').form-control#categoryName
+						section.panel
+							div.input-group
+								span.input-group-addon 标题
+								input(type='text' name='title' value='#{blog.title?blog.title:""}').form-control
+						section.panel
+							script(type="text/plain" id="myEditor" name="content")
+							script(src='/asserts/ueditor.config.js')
+							script(src='/asserts/editor_api.js')
+							script(type='text/javascript').
+								ue = UE.getEditor('myEditor',{initialFrameHeight:500});
+								ue.ready(function() {
+									$.ajax({
+										url: '/blogs/#{blog._id}/content',
+										type: 'GET',
+										success: function(result) {
+											ue.setContent(result);
+										}
+									});									
+								});
+								form=document.getElementById("form");
+						section.panel
+							input(type='submit' value='保存').btn.btn-primary
+							

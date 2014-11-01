@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 博客管理
+				a(href='/admin/blogs/0/edit' style='margin-left:10px').btn.btn-success.btn-shadow.btn-sm#addCategory 添加
+			div.panel-body
+				table.table
+					tr
+						th #
+						th 标题
+						th 发布时间
+						th 操作
+					-for(var i=0;i<blogs.length;i++)
+						-var blog = blogs[i];
+						-var time = blog.create_time;
+						tr
+							td #{i}
+							td #{blog.title.slice(0,30)}
+							td #{time.getFullYear()}-#{time.getMonth()+1}-#{time.getDate()}&nbsp;&nbsp;#{time.getHours()>=10?time.getHours():('0'+time.getHours())}:#{time.getMinutes()>=10?time.getMinutes():('0'+time.getMinutes())}
+							td
+								div.btn-group
+									a(_id='#{blog._id}').btn.btn-primary.btn-shadow.btn-sm.removeBlog 删除
+									a(href='/admin/blogs/#{blog._id}/edit').btn.btn-success.btn-shadow.btn-sm 编辑
+									a(_id='#{blog._id}').btn.btn-info.btn-shadow.btn-sm.stickBlog 置顶
+							
+	

@@ -1,0 +1,32 @@
+doctype html
+html
+	include inc/header
+	
+	body
+		nav(role='navigation').navbar.navbar-default.navbar-inverse.navbar-fixed-top
+			div.navbar-header
+				a(href='/').navbar-brand Leo的博客
+			div.navbar-collapse.collapse.container
+				ul.nav.navbar-nav#navigation
+					li#blog
+						a(href='/blogs?index=1&size=5') &nbsp;博客&nbsp;
+					li#about
+						a(href='/about') 关于我
+					li#admin
+						a(href='/admin') 后台管理
+						
+				div.nav.navbar-nav.navbar-right
+					form(role='search' action='/blogs' method='get').navbar-form
+						div(style='margin-right:10px').form-group
+							-var s=search?search:'';
+							input(type='text' name='search' placeholder='搜索' value='#{s}').form-control
+						
+						
+		div.container
+			block content
+			include inc/footer
+			
+		include inc/scripts
+		
+		script(src='/javascripts/blog.js')
+		block scripts

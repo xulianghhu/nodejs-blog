@@ -1,0 +1,26 @@
+extends layout
+
+
+
+block content
+	div.row.well
+		h2(style='text-align:center') #{blog.title}
+		-var createTime = new Date(blog.create_time); 
+		h4(style='text-align:center;color:#999;').author 发表于 #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日
+		div.content
+		script(src='/javascripts/jquery-1.10.2.min.js')
+		
+		script(src='/asserts/ueditor.parse.js')
+		script(type='text/javascript').
+			$.ajax({
+				url: '/blogs/#{blog._id}/content',
+				type: 'GET',
+				success: function(result) {
+					$('.content').html(result);
+					uParse('.content', {
+						rootPath: '../'
+					})
+				}
+			});														
+	
+	

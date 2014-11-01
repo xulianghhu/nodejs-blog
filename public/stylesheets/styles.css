@@ -1,0 +1,79 @@
+body {
+    color: #393939;
+    font-family: "Microsoft YaHei",Î¢ÈíÑÅºÚ,arial,ËÎÌå;
+    font-size:15px;
+	padding-top: 70px;
+	padding-bottom: 40px;
+	background-image: url('/images/background.png')
+}
+
+.about p {
+	color: #777;
+	line-height: 1.5em;
+}
+
+.single-line {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.table td , .table th{
+   text-align: center;   
+}
+
+.blog-img img {
+    width: 100%;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.blog-item h1, .blog-item h1 a {
+    font-size:25px;
+    color: #428bca;
+    font-weight: 300;
+    font-family: "Microsoft YaHei",Î¢ÈíÑÅºÚ,arial,ËÎÌå;
+}
+
+.blog-item h1 {
+    margin-bottom: 20px;
+    line-height: 35px;
+    margin-top: 0;
+}
+
+.blog-item h1 a:hover {
+    text-decoration: underline;
+}
+
+.blog-item p {
+	display:block;
+	max-height:85px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.blog-item h4 {
+	display:block;
+	max-height:20px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.blog-body {
+	float: right;
+	margin-right: 10px;
+	font-size: 13px;
+}
+
+.blog-body span {
+	color: #999;
+}
+
+.author {
+    margin:25px 0 30px 0;
+    font-size: 16px;
+}
+
+.author a, .shate-view a , .title a {
+    color: #428bca;
+}

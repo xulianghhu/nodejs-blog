@@ -1,0 +1,23 @@
+extends layout
+	
+
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 类别编辑
+			div.panel-body
+				div.col-lg-3
+					form(action='/categories/#{category._id?category._id:0}' method='post')
+						section.panel
+							div.input-group
+								span.input-group-addon 名字
+								input(type='text' name='name' value='#{category.name?category.name:""}').form-control
+						section.panel
+							div.input-group
+								span.input-group-addon 优先级
+								input(type='text' name='priority' value='#{category.priority?category.priority:0}').form-control
+						section.panel
+							input(type='submit' value='保存').btn.btn-primary
+						
+	

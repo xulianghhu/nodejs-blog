@@ -1,0 +1,82 @@
+extends layout
+
+block content
+	div.row
+		div.col-lg-9
+			script(src='/javascripts/jquery-1.10.2.min.js')
+			script(src='/asserts/ueditor.parse.js')
+			each blog in blogs
+				div.blog-item
+					div.row
+						div.panel.panel-default
+							div.panel-heading
+								h4
+									a(href='/blogs/#{blog._id}') #{blog.title}
+								- var time = new Date(blog.create_time);
+							div.panel-body
+								div(id='#{blog._id}').content
+								script(type='text/javascript').
+									$.ajax({
+										url: '/blogs/#{blog._id}/content',
+										type: 'GET',
+										success: function(result) {
+											$('##{blog._id}').html(result);
+											uParse('.content', {
+												rootPath: '../'
+											})
+										}
+									});		
+								div.blog-body
+									span #{time.getFullYear()}年#{time.getMonth()+1}月#{time.getDate()}日 | 浏览(#{blog.count})
+
+			
+			div(style='text-align:center')
+				- if(pageCount>1)
+					ul.pagination
+						-var suffix = search ? ('search='+search):'';
+						li
+							a(href='/blogs?#{suffix}') &laquo;
+						-for(var i=1; i<=pageCount; i++)
+							if(index == i)
+								li.active
+									span #{i}
+							else
+								li
+									a(href='/blogs?index=#{i}&size=#{size}&#{suffix}') #{i}
+						li
+							a(href='/blogs?index=#{pageCount}&size=#{size}&#{suffix}') &raquo;				
+				
+			
+		div.col-lg-3
+			div.list-group#categories
+				if(selectedCategory==='')
+					a(href='/blogs').list-group-item.active 全部 
+						span.badge.pull-right #{totalCount}
+				else
+					a(href='/blogs').list-group-item 全部 
+						span.badge.pull-right #{totalCount}
+				-var total=0;
+				each category in categories
+					-total+=category.blogCount;
+					if(selectedCategory==category._id)
+						a(href='/blogs?category=#{category._id}').list-group-item.active #{category.name}
+							span.badge.pull-right #{category.blogCount}
+					else
+						a(href='/blogs?category=#{category._id}').list-group-item #{category.name}
+							span.badge.pull-right #{category.blogCount}
+					
+				if(total<totalCount)
+					if (selectedCategory==='others')
+						a(href='/blogs?category=others').list-group-item.active 其他
+							span.badge.pull-right #{totalCount-total}
+					else
+						a(href='/blogs?category=others').list-group-item 其他
+							span.badge.pull-right #{totalCount-total}
+			
+			h5(style='color:#aaa') 热门博客
+			div.list-group.title
+				each blog in popular
+					a(href='/blogs/#{blog._id}').list-group-item.single-line #{blog.title}
+
+		
+		
