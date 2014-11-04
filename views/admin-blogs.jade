@@ -22,8 +22,11 @@ block content
 							td #{time.getFullYear()}-#{time.getMonth()+1}-#{time.getDate()}&nbsp;&nbsp;#{time.getHours()>=10?time.getHours():('0'+time.getHours())}:#{time.getMinutes()>=10?time.getMinutes():('0'+time.getMinutes())}
 							td
 								div.btn-group
-									a(_id='#{blog._id}').btn.btn-primary.btn-shadow.btn-sm.removeBlog 删除
-									a(href='/admin/blogs/#{blog._id}/edit').btn.btn-success.btn-shadow.btn-sm 编辑
+									if (!blog.removed)
+										a(_id='#{blog._id}' removed='false').btn.btn-danger.btn-shadow.btn-sm.toggleBlog 删除
+									else
+										a(_id='#{blog._id}' removed='true').btn.btn-success.btn-shadow.btn-sm.toggleBlog 还原
+									a(href='/admin/blogs/#{blog._id}/edit').btn.btn-primary.btn-shadow.btn-sm 编辑
 									a(_id='#{blog._id}').btn.btn-info.btn-shadow.btn-sm.stickBlog 置顶
-							
+
 	
