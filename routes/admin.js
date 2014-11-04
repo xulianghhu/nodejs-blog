@@ -15,7 +15,7 @@ exports.categories = function(req, res) {
 }
 
 exports.blogs = function(req, res) {
-	Blog.findAll(function(blogs) {
+	Blog.findAll({} ,function(blogs) {
 		res.render('admin-blogs', {blogs: blogs})
 	});
 }

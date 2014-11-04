@@ -3,10 +3,10 @@ extends layout
 
 
 block content
-	div.row.well
+	div.row.well.blog-detail
 		h2(style='text-align:center') #{blog.title}
 		-var createTime = new Date(blog.create_time); 
-		h4(style='text-align:center;color:#999;').author 发表于 #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日
+		h4.author 发表于 #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日
 		div.content
 		script(src='/javascripts/jquery-1.10.2.min.js')
 		

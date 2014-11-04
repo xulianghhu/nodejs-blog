@@ -1,14 +1,14 @@
 body {
 	color: #393939;
-	font-family: "Microsoft YaHei", "微软雅黑", arial, "宋体";
+	font-family: "Microsoft YaHei", "微软雅黑", Arial, "宋体";
 	font-size: 15px;
 	padding-top: 70px;
 	padding-bottom: 40px;
 	background-image: url('../images/background.png')
 }
 
-.loginBtn {
-
+.login-margin {
+	margin: 40px 40px;
 }
 
 .footer p {
@@ -16,11 +16,7 @@ body {
 	color: #777;
 }
 
-.description {
-	color: #777;
-}
-
-.about p {
+.about p .description {
 	color: #777;
 	line-height: 1.5em;
 }
@@ -31,45 +27,12 @@ body {
 	text-overflow: ellipsis;
 }
 
-.table td, .table th {
+.table td, .table th, .blog-detail h2, .blog-detail h4 {
 	text-align: center;
 }
 
-.blog-img img {
-	width: 100%;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-}
-
-.blog-item h1, .blog-item h1 a {
-	font-size: 25px;
+.blog-title a, .blog-title a:hover {
 	color: #428bca;
-	font-weight: 300;
-	font-family: "Microsoft YaHei", "微软雅黑", arial, "宋体";
-}
-
-.blog-item h1 {
-	margin-bottom: 20px;
-	line-height: 35px;
-	margin-top: 0;
-}
-
-.blog-item h1 a:hover {
-	text-decoration: underline;
-}
-
-.blog-item p {
-	display: block;
-	max-height: 85px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.blog-item h4 {
-	display: block;
-	max-height: 20px;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .blog-body {
@@ -78,15 +41,11 @@ body {
 	font-size: 13px;
 }
 
-.blog-body span {
+.blog-body span, .blog-detail h4 {
 	color: #999;
 }
 
 .author {
 	margin: 25px 0 30px 0;
 	font-size: 16px;
-}
-
-.author a, .shate-view a, .title a {
-	color: #428bca;
 }

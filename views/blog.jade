@@ -74,6 +74,6 @@ block content
 							span.badge.pull-right #{totalCount-total}
 
 			h5(style='color:#aaa') 热门博客
-			div.list-group.title
+			div.list-group.blog-title
 				each blog in popular
 					a(href='/blogs/#{blog._id}').list-group-item.single-line #{blog.title}

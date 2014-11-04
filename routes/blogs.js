@@ -116,8 +116,9 @@ exports.save = function (req, res) {
 				blog.category = req.body.category;
 				Category.incBlogCount(req.body.category);
 			}
-			blog.save();
-			res.redirect('/blogs/' + blog._id);
+			blog.save(function(err) {
+				res.redirect('/blogs/' + blog._id);
+			});
 		}
 	});
 
