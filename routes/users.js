@@ -3,6 +3,20 @@
  */
 var User = require('./../dao/User.js');
 
+// 是否已经登录
+exports.auth = function(req, res, next) {
+	if (req.session.authenticated) {
+		next();
+	} else {
+		res.redirect('/login');
+	}
+}
+
+// 是否是管理员
+exports.manage = function(req, res, next) {
+
+}
+
 exports.register = function(req, res) {
 
 	var user = User.newInstance();
@@ -16,7 +30,7 @@ exports.register = function(req, res) {
 			result.message = "操作异常";
 		} else {
 			result.code = 1;
-			result.code = "注册成功";
+			result.message = "注册成功";
 		}
 		res.json(result);
 	});
