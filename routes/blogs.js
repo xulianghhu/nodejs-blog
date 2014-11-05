@@ -114,7 +114,7 @@ exports.save = function (req, res) {
 				blog.category = req.body.category;
 				Category.incBlogCount(req.body.category);
 			}
-			blog.save(function(err) {
+			blog.save(function (err) {
 				res.redirect('/blogs/' + blog._id);
 			});
 		}
@@ -123,21 +123,25 @@ exports.save = function (req, res) {
 }
 
 exports.toggle = function (req, res) {
-	var removed = req.query.removed;
+	var removed = req.body.removed;
 	var isRemove = 'false' === removed;
-	console.log(isRemove);
+	var result = {};
+	result.code = -1;
 
 	Blog.toggleById(req.params.id, isRemove, function (err) {
-		if (!err) {
-			res.write('success');
+		if (err) {
+			res.json(result);
+			return;
+		} else {
 			Blog.findById(req.params.id, function (blog) {
 				if (!err) {
 					if (isRemove) Category.decBlogCount(blog.category);
-					else Category.incBlogCount(blog.category)
+					else Category.incBlogCount(blog.category);
+					result.code = 1;
 				}
+				res.json(result);
 			});
 		}
-		res.end();
 	});
 
 
@@ -169,11 +173,10 @@ exports.edit = function (req, res) {
 }
 
 exports.sticky = function (req, res) {
-	console.log(req.params.id);
+	var result = {};
 	Blog.sticky(req.params.id, function (err) {
-		if (!err)
-			res.write('success');
-		res.end();
+		result.code = err ? -1 : 1;
+		res.json(result);
 	});
 }
 

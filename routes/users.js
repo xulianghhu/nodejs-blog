@@ -19,6 +19,8 @@ exports.manage = function(req, res, next) {
 
 exports.register = function(req, res) {
 
+
+
 	var user = User.newInstance();
 	user.email = req.body.email;
 	user.username = req.body.username;

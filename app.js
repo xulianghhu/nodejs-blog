@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-
-var index = require('./routes/index');
-var user = require('./routes/users');
-var blogs = require('./routes/blogs');
-var categories = require('./routes/categories');
-var admin = require('./routes/admin');
+var express = require('express'),
+	path = require('path'),
+	favicon = require('serve-favicon'),
+	logger = require('morgan'),
+	cookieParser = require('cookie-parser'),
+	bodyParser = require('body-parser'),
+	mongoose = require('mongoose');
 
 var app = express();
+
+var index = require('./routes/index'),
+	user = require('./routes/users'),
+	blogs = require('./routes/blogs'),
+	categories = require('./routes/categories'),
+	admin = require('./routes/admin');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,17 +31,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', index.home); // 主页
 app.get('/login', index.login); // 登录界面
 app.get('/about', index.about); // 关于界面
+app.get('/blogs', blogs.findBlogs);
+app.get('/blogs/:id', blogs.findBlogById);
+app.get('/blogs/:id/content', blogs.findBlogContentById);
 
 app.post('/register', user.register);
 
 app.post('/categories/:id', categories.save);
 app.delete('/categories/:id', categories.remove);
 
-app.get('/blogs', blogs.findBlogs);
-app.get('/blogs/:id', blogs.findBlogById);
+
 app.post('/blogs/:id', blogs.save);
 app.post('/blogs/:id/toggle', blogs.toggle);
-app.get('/blogs/:id/content', blogs.findBlogContentById);
+
 
 app.get('/admin', admin.admin);
 app.get('/admin/categories', admin.categories);

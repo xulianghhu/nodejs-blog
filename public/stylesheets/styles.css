@@ -45,12 +45,6 @@ body {
 	margin: 0 0 40px 0;
 }
 
-.footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-}
-
 .footer p {
 	font-size: 12px;
 	color: #777;

@@ -11,7 +11,7 @@ var CatetorySchema = new Schema({
 mongoose.model("category", CatetorySchema);
 var Category = mongoose.model('category');
 
-// final all categories
+// find all categories
 exports.findAll = function (callback) {
 	Category.find()
 			.sort('-priority')

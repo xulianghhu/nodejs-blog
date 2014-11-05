@@ -1,21 +1,21 @@
 var Category = require('./../dao/Category.js');
 
-exports.edit = function(req, res) {
+exports.edit = function (req, res) {
 	// create a new category
 	if (req.params.id == 0) {
 		res.render('category-edit', {category: Category.newInstance()});
-	} 
+	}
 	// update an exist one
 	else {
-		Category.findById(req.params.id, function(category) {
+		Category.findById(req.params.id, function (category) {
 			res.render('category-edit', {category: category});
 		});
 	}
 }
 
-exports.save = function(req, res) {
-	
-	Category.findById(req.params.id, function(category) {
+exports.save = function (req, res) {
+
+	Category.findById(req.params.id, function (category) {
 		if (category) {
 			Category.updateById(req.params.id, {name: req.body.name, priority: req.body.priority});
 		} else {
@@ -26,16 +26,21 @@ exports.save = function(req, res) {
 			category.save();
 		}
 	});
-	
+
 	res.redirect('/admin/categories');
 }
 
-exports.remove = function(req, res) {
-	Category.findById(req.params.id, function(category) {
+exports.remove = function (req, res) {
+	var result = {};
+	result.code = -1;
+	Category.findById(req.params.id, function (category) {
 		if (category) {
-			category.remove();
-			res.write('success');
+			category.remove(function (err) {
+				result.code = err ? -1 : 1;
+				res.json(result);
+			});
+		} else {
+			res.json(result);
 		}
-		res.end();
 	});
 }

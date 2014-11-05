@@ -43,25 +43,12 @@ block content
 				span.input-group-addon
 					b 确认密码
 				input(type='password', name='password',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请再次输入密码</span>",data-html="true").form-control.input-lg#registerPasswordAgain
+			p.text-center
+				small 123456
 			p.help-block.text-center.login-margin
 				p.text-center
 					button(type='submit').btn.btn-primary.btn-lg &nbsp;&nbsp;注&nbsp;&nbsp;册&nbsp;&nbsp;
 
 block scripts
 	script(type='text/javascript', src='/javascripts/flippant.js')
-	script.
-		var front = document.getElementById('front')
-			, back_content = document.getElementById('back').innerHTML
-			, back;
-
-		$('#register').click(function () {
-			var timeout = 400;
-			back = flippant.flip(front, back_content, 'card', 'login-bg-back', timeout);
-			$('#loginEmail').popover('hide');
-			$('#loginPassword').popover('hide');
-			back.close();
-			window.setTimeout(function () {
-				$('#front').hide();
-				$('#back').show();
-			}, timeout);
-		});
+	script(type='text/javascript', src='/javascripts/login.js')
