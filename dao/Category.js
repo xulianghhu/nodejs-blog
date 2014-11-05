@@ -8,7 +8,7 @@ var CatetorySchema = new Schema({
 	blogCount: {type: Number, default: 0}
 });
 
-mongoose.model("category", CatetorySchema)
+mongoose.model("category", CatetorySchema);
 var Category = mongoose.model('category');
 
 // final all categories

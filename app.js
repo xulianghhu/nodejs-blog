@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var index = require('./routes/index');
+var user = require('./routes/users');
 var blogs = require('./routes/blogs');
 var categories = require('./routes/categories');
 var admin = require('./routes/admin');
@@ -26,9 +27,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', index.home);
-app.get('/login', index.login);
-app.get('/about', index.about);
+app.get('/', index.home); // 主页
+app.get('/login', index.login); // 登录界面
+app.get('/about', index.about); // 关于界面
+
+app.post('/register', user.register);
 
 app.post('/categories/:id', categories.save);
 app.delete('/categories/:id', categories.remove);

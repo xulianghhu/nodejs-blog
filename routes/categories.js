@@ -1,5 +1,3 @@
-var express = require('express');
-var mongoose = require('mongoose');
 var Category = require('./../dao/Category.js');
 
 exports.edit = function(req, res) {

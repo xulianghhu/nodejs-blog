@@ -1,5 +1,3 @@
-var express = require('express');
-
 // home page
 exports.home = function (req, res) {
 	res.render('index', {});

@@ -12,7 +12,7 @@ var BlogSchema = new Schema({
 	removed: {type: Boolean, default: false}
 });
 
-mongoose.model("blog", BlogSchema)
+mongoose.model("blog", BlogSchema);
 var Blog = mongoose.model('blog');
 
 // find all blogs

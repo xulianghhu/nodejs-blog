@@ -12,13 +12,32 @@ body {
 	background-image: url('../images/background.png')
 }
 
-.login-bg {
+.display {
+	display: none;
+}
+
+.login-bg-front {
+	position: absolute;
+	width: 400px;
+	left: 50%;
+	margin-left: -200px;
+	height: auto;
 	border-radius: 5px;
 	background: #fff;
 	padding: 40px;
 }
 
-.login-bg a {
+.login-bg-back {
+	position: absolute;
+	width: 400px;
+	left: 50%;
+	height: auto;
+	border-radius: 5px;
+	background: #fff;
+	padding: 40px;
+}
+
+.login-bg-front a {
 	cursor: pointer;
 }
 

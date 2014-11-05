@@ -1,5 +1,3 @@
-var express = require('express');
-var mongoose = require('mongoose');
 var Blog = require('./../dao/Blog.js');
 var Category = require('./../dao/Category.js');
 

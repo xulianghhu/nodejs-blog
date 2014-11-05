@@ -1,58 +1,67 @@
 extends layout
 
 block content
-	div.col-md-4.col-md-offset-4.login-bg#flipthis
+	div.login-bg-front#front
 		h3.login-margin 登录到
 			b LEONOTE
-		form(action='#', method='post').login-margin
+		form(action='#', method='post', onsubmit='return validateLogin();').login-margin
 			p.input-group
 				span.input-group-addon
 					b 邮箱
-				input(text='text', name='email').form-control.input-lg
+				input(type='text', name='email',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入正确的邮箱地址</span>",data-html="true").form-control.input-lg#loginEmail
 			p.input-group
 				span.input-group-addon
 					b 密码
-				input(text='password', name='password').form-control.input-lg
+				input(type='password', name='password',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入密码</span>",data-html="true").form-control.input-lg#loginPassword
 			p.help-block.text-center.login-margin
 				p.text-center
 					button(type='submit').btn.btn-primary.btn-lg &nbsp;&nbsp;登&nbsp;&nbsp;录&nbsp;&nbsp;
-		div.login-margin.text-right
+		div.text-right
 			small.text-muted
 				a#register 还没有帐号? 注册一个
 
 
-	div(style='display:none').col-md-4.col-md-offset-4#back
+	div.login-bg-front.display#back
 		h3.login-margin
 			span 注册
 			b LEONOTE
 			span 账号
-		form(action='#', method='post').login-margin
+		form(action='/register', method='post', onsubmit='return validateRegister();').login-margin
 			p.input-group
 				span.input-group-addon
 					b 邮箱
-				input(text='text', name='email').form-control.input-lg
+				input(type='text', name='email',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入正确的邮箱地址</span>",data-html="true").form-control.input-lg#registerEmail
 			p.input-group
 				span.input-group-addon
 					b 昵称
-				input(text='text', name='username').form-control.input-lg
+				input(type='text', name='username',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入昵称</span>",data-html="true").form-control.input-lg#registerUsername
 			p.input-group
 				span.input-group-addon
 					b 输入密码
-				input(text='password').form-control.input-lg
+				input(type='password', data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入密码</span>",data-html="true").form-control.input-lg#registerPassword
 			p.input-group
 				span.input-group-addon
 					b 确认密码
-				input(text='password', name='password').form-control.input-lg
+				input(type='password', name='password',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请再次输入密码</span>",data-html="true").form-control.input-lg#registerPasswordAgain
 			p.help-block.text-center.login-margin
-				p.text-center.span3
+				p.text-center
 					button(type='submit').btn.btn-primary.btn-lg &nbsp;&nbsp;注&nbsp;&nbsp;册&nbsp;&nbsp;
+
 block scripts
 	script(type='text/javascript', src='/javascripts/flippant.js')
 	script.
-		var front = document.getElementById('flipthis')
+		var front = document.getElementById('front')
 			, back_content = document.getElementById('back').innerHTML
-			, back
+			, back;
 
-		$('#register').click(function() {
-			flippant.flip(front, back_content, 'card', 'login-bg')
+		$('#register').click(function () {
+			var timeout = 400;
+			back = flippant.flip(front, back_content, 'card', 'login-bg-back', timeout);
+			$('#loginEmail').popover('hide');
+			$('#loginPassword').popover('hide');
+			back.close();
+			window.setTimeout(function () {
+				$('#front').hide();
+				$('#back').show();
+			}, timeout);
 		});

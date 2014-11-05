@@ -1,6 +1,3 @@
-var express = require('express');
-var router = express.Router();
-
 var Category = require('./../dao/Category.js');
 var Blog = require('./../dao/Blog.js');
 
